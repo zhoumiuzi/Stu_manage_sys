@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+ <trees>
+     <tree path="/vue/src/utils" title="前后端通信"/>
+     <tree path="/vue/src/assets/css/index.scss" title="主题配色"/>
+     <tree path="/vue/index.html" title="默认页面"/>
+     <tree path="/springboot/src/main/java/com/example/common/Result.java" title="返回接口数据"/>
+     <tree path="/springboot/src/main/java/com/example/common/CorsConfig.java" title="跨域处理"/>
+     <tree path="/springboot/src/main/java/com/example/exception" title="异常处理"/>
+     <tree path="/vue/src/router" title="路由"/>
+     <tree path="/vue/src/views/login.vue" title="登录界面"/>
+     <tree path="/vue/src/views/Manager.vue" title="管理员主页面"/>
+     <tree path="/vue/src/main.js" title="配置引入"/>
+     <tree path="/springboot/src/main/java/com/zyy/mapper" title="与数据库交互" extension="" presentableText=""
+           tooltipTitle=""/>
+ </trees>
