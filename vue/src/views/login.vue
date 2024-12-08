@@ -84,7 +84,6 @@ const login = () => {
 }
 
 .login_box {
-  //border: 1px solid;
   background-color: #87536a;
   box-shadow: 0 0 50px rgb(105, 61, 83);
   padding: 35px;
