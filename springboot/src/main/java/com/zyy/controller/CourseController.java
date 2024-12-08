@@ -27,9 +27,9 @@ public class CourseController {
     private CourseService courseService;
 
     @GetMapping("/selectPage")
-    public Result selectPage(@RequestParam(defaultValue = "1")Integer pagenum, @RequestParam(defaultValue = "1") Integer pagesize) {
+    public Result selectPage(@RequestParam(defaultValue = "1")Integer pagenum, @RequestParam(defaultValue = "10") Integer pagesize,@RequestParam(defaultValue = "") String search) {
         //需要service去返回分页数据
-        PageInfo<Course> coursePageInfo = courseService.selectPage(pagenum, pagesize);
+        PageInfo<Course> coursePageInfo = courseService.selectPage(pagenum, pagesize,search);
         return Result.success(coursePageInfo);
     }
 

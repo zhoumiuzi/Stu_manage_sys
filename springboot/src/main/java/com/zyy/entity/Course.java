@@ -22,7 +22,7 @@ public class Course {
 
     private Integer teacherid;
 
-    private String teachername;
+    private String username;
 
     private String coursedesc;
 
@@ -74,12 +74,12 @@ public class Course {
         this.teacherid = teacherid;
     }
 
-    public String getTeachername() {
-        return teachername;
+    public String getUsername() {
+        return username;
     }
 
-    public void setTeachername(String teachername) {
-        this.teachername = teachername;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getCoursedesc() {

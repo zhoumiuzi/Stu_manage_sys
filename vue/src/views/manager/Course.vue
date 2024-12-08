@@ -7,9 +7,10 @@
           style="width: 240px"
           placeholder="输入课程名称或课程号"
           :prefix-icon="Search"
+          @keydown.enter="load"
       />
-      <el-button type="primary" style="margin: 0 10px 0 20px">查询</el-button>
-      <el-button type="info" style="margin: 0 10px 0 10px">重置</el-button>
+      <el-button type="primary" style="margin: 0 10px 0 20px" @click="load">查询</el-button>
+      <el-button type="info" style="margin: 0 10px 0 10px" @click="reload">重置</el-button>
     </div>
 
     <div class="card">
@@ -51,18 +52,20 @@ import request from "@/utils/request";
 
 const data = reactive({
   // 课程名字或者课程号
-  name_num: "",
+  name_num: '',
   tableData: [],
   total: 0,
   pagenum: 1,
-  pagesize: 10,
+  pagesize: 18,
 });
 
 const load = () => {
   request.get('/management/course/selectPage', {
     params: {
+      //左边后端，右边前端，老是搞混！！！！！烦！！！
       pagenum: data.pagenum,
       pagesize: data.pagesize,
+      search: data.name_num,
     }
   }).then(res => {//存在或者空,加问号，有值就取，没值就不取
     data.tableData = (res.data?.list || []).map(item => ({
@@ -71,7 +74,7 @@ const load = () => {
       course_num: item.coursenum, // 对应后端的 coursenum
       course_type: item.coursetype, // 对应后端的 coursetype
       course_credit: item.coursecredits, // 对应后端的 coursecredits
-      teacher_name: item.teachername || '暂无教师', // 对应后端的 teachername
+      teacher_name: item.username || '暂无教师', // 对应后端的 teachername
       course_desc: item.coursedesc || '暂无描述' // 对应后端的 coursedesc
 
     }));
@@ -85,6 +88,12 @@ const handleCurrentChange = (pagenum) => {
   load();
   console.log(pagenum)
 }
+
+const reload = () => {
+  data.name_num='';
+  load();
+}
+
 
 </script>
 

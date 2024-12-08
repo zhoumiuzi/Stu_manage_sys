@@ -24,9 +24,9 @@ public class CourseService {
 
     //返回两个值，一个是查询的总数，还有一个是数据列表
     //pagenum是当前页码，pagesize是每一页的个数
-    public PageInfo<Course> selectPage(Integer pageNum, Integer pageSize) {
+    public PageInfo<Course> selectPage(Integer pageNum, Integer pageSize,String search) {
         PageHelper.startPage(pageNum, pageSize);
-        List<Course> courseList = courseMapper.selectAll();
+        List<Course> courseList = courseMapper.selectAll(search);
         System.out.println(courseList);
         return PageInfo.of(courseList);
     }

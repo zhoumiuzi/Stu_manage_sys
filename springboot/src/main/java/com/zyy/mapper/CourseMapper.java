@@ -15,8 +15,11 @@ import java.util.List;
 
 public interface CourseMapper {
 
-    @Select("SELECT c.courseId, c.courseName, c.coursenum, c.courseType,c.coursecredits, c.coursedesc,t.teacherid, t.username from courses c left join stu_manage_sys.teachers t on c.teacherid = t.teacherid order by c.courseid desc ")
-    List<Course> selectAll();
+    @Select("SELECT c.courseId, c.coursename, c.coursenum, c.courseType,c.coursecredits, c.coursedesc,t.teacherid, t.username from courses c " +
+            "left join stu_manage_sys.teachers t on c.teacherid = t.teacherid " +
+            "WHERE (c.coursename LIKE CONCAT('%', #{search}, '%') OR c.coursenum LIKE CONCAT('%', #{search}, '%'))" +
+            "order by c.courseid desc ")
+    List<Course> selectAll(String search);
 
 
 }
