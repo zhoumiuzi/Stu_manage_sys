@@ -58,7 +58,7 @@ public class AdminController {
     public Result studentAddSave(@RequestBody Student student) {
         try {
             if (student.getGender() == null || (!student.getGender().equals("M") && !student.getGender().equals("F"))) {
-                throw new IllegalArgumentException("Invalid gender value: " + student.getGender());
+                throw new IllegalArgumentException("没有选择性别！ " + student.getGender());
             }
             adminService.addStudentData(student);
             return Result.success("学生信息：" + student + " 添加成功");

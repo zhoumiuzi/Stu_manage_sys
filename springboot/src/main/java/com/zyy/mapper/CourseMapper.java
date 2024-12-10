@@ -49,4 +49,10 @@ public interface CourseMapper {
     @Delete("DELETE FROM courses WHERE courseid= #{courseid}")
     void deleteById(Integer courseid);
 
+
+    @Select("SELECT COUNT(*) FROM courses WHERE coursenum = #{coursenum}")
+    Integer findByCoursenum(Integer coursenum);
+
+    @Select("SELECT courseid FROM courses WHERE coursenum = #{coursenum}")
+    Integer findCourseIdByCoursenum(Integer coursenum);
 }

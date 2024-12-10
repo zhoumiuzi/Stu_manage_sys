@@ -24,6 +24,9 @@ public class CourseService {
 
     //新增加传入数据,因为前端输入的是老师的名称，所以需要获取老师的id再填入
     public void addData(Course course) {
+        if (courseMapper.findByCoursenum(course.getCoursenum()) != '0') {
+            throw new IllegalArgumentException("课程号已存在");
+        }
         // 如果username为null、空字符串、或“暂无教师”，则teacherid=null
         if (course.getUsername() == null || course.getUsername().trim().isEmpty()
                 || "暂无教师".equals(course.getUsername().trim())) {
@@ -44,15 +47,28 @@ public class CourseService {
         if (course.getCourseid() == null) {
             throw new IllegalArgumentException("课程ID不能为空");
         }
-        // 同样的逻辑应用在更新上
-        if (course.getUsername() == null || course.getUsername().trim().isEmpty()
-                || "暂无教师".equals(course.getUsername().trim())) {
+
+        // 检查更新时课程编号是否已存在（排除当前课程的编号）
+        Integer existingId = courseMapper.findCourseIdByCoursenum(course.getCoursenum());
+        if (existingId != null && !existingId.equals(course.getCourseid())) {
+            throw new IllegalArgumentException("课程编号重复！请重新设置课程编号！");
+        }
+
+        // 设置教师ID
+        if (course.getUsername() == null || course.getUsername().trim().isEmpty() || "暂无教师".equals(course.getUsername().trim())) {
             course.setTeacherid(null);
         } else {
             Integer teacherid = courseMapper.fineteacherID(course.getUsername());
             course.setTeacherid(teacherid);
         }
+
+        // 更新课程数据
         courseMapper.updateCourse(course);
+    }
+
+
+    public boolean isCoursenumExists(Integer coursenum) {
+        return courseMapper.findByCoursenum(coursenum) > 0;
     }
 
 

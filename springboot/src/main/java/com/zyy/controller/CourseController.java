@@ -4,9 +4,11 @@ import com.github.pagehelper.PageInfo;
 import com.zyy.common.Result;
 import com.zyy.entity.Course;
 import com.zyy.service.CourseService;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Map;
 
 /**
  * @Author: zhouMiuzi
@@ -35,10 +37,16 @@ public class CourseController {
     //RRequestBody把前端的json数据传入
     public Result add(@RequestBody Course course) {
         try {
+            // 检查课程编号是否重复
+            if (courseService.isCoursenumExists(course.getCoursenum())) {
+                return Result.error("课程编号已存在，请重新输入");
+            }
             courseService.addData(course);
             return Result.success("课程信息：" + course + " 添加成功");
         } catch (IllegalArgumentException e) {
             return Result.error("添加失败: " + e.getMessage());
+        }catch (DuplicateKeyException e) { // 捕获数据库唯一约束异常
+            return Result.error("课程号已存在，请输入唯一的学号");
         }
     }
 
@@ -60,6 +68,12 @@ public class CourseController {
         } catch (IllegalArgumentException e) {
             return Result.error("删除失败: " + e.getMessage());
         }
+    }
+
+    @GetMapping("/checkCoursenum")
+    public Result checkCoursenum(@RequestParam int coursenum) {
+        boolean exists = courseService.isCoursenumExists(coursenum);
+        return Result.success(Map.of("exists", exists));
     }
 
 }

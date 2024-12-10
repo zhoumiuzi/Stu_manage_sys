@@ -140,7 +140,6 @@ const load = () => {
 }
 load()
 
-//添加新课程数据
 const dataAddSave = () => {
   const requestData = {
     courseid: data.form.cor_id,
@@ -151,21 +150,29 @@ const dataAddSave = () => {
     coursedesc: data.form.cor_desc === '暂无描述' ? '' : data.form.cor_desc,
     username: data.form.tea_name === '暂无教师' ? '' : data.form.tea_name,
   };
-  request.request({
-    url: data.form.cor_id ? '/management/course/update' : '/management/course/add',
-    method: data.form.cor_id ? 'PUT' : 'POST',
-    data: requestData
-  }).then(res => {
-    if (res.code === "200") {
-      load();
-      data.formvisible = false;
-      ElMessage.success("课程处理成功");
-      console.log(requestData);
-    } else {
-      ElMessage.error("课程处理失败");
-    }
-  })
-}
+
+  request
+      .request({
+        url: data.form.cor_id ? '/management/course/update' : '/management/course/add',
+        method: data.form.cor_id ? 'PUT' : 'POST',
+        data: requestData,
+      })
+      .then((res) => {
+        if (res.code === "200") {
+          load();
+          data.formvisible = false;
+          ElMessage.success("课程处理成功");
+        } else {
+          ElMessage.error(res.msg || "课程处理失败");
+        }
+      })
+      .catch((error) => {
+        // 捕获后端返回的错误信息
+        const errorMsg = error.response?.data?.msg || "课程处理失败";
+        ElMessage.error(errorMsg);
+      });
+};
+
 
 //这个click是编辑添加的click
 const handleClick = (row) => {
@@ -196,7 +203,7 @@ const addFormShow = () => {
 }
 
 const deleteManage = (course_id) => {
-  ElMessageBox.confirm('删除数据后无法恢复，您确认删除吗？', '删除确认', { type: 'warning'}).then(res => {
+  ElMessageBox.confirm('删除数据后无法恢复，您确认删除吗？', '删除确认', {type: 'warning'}).then(res => {
     request.delete('/management/course/delete/' + course_id).then(res => {
       if (res.code === '200') {
         load()    // 重新获取数据
@@ -205,7 +212,8 @@ const deleteManage = (course_id) => {
         ElMessage.error(res.msg)
       }
     })
-  }).catch(res => {})
+  }).catch(res => {
+  })
 }
 
 //处理页面跳转
@@ -272,7 +280,6 @@ const reload = () => {
   margin-right: 10px;
   margin-left: 5px;
 }
-
 
 
 </style>
