@@ -4,10 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.zyy.common.Result;
 import com.zyy.entity.Student;
 import com.zyy.service.StudentService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -30,6 +27,16 @@ public class StudentController {
         //返回分页数据
         PageInfo<Student> studentPageInfo=studentService.selectPage(pagenum,pagesize,student);
         return Result.success(studentPageInfo);
+    }
+
+    @PostMapping("/add")
+    public Result add(@RequestBody Student student) {
+        try{
+            studentService.add(student);
+            return Result.success("课程信息：" + student + " 添加成功");
+        }catch (IllegalArgumentException e) {
+            return Result.error("添加失败: " + e.getMessage());
+        }
     }
 
 

@@ -2,6 +2,8 @@ package com.zyy.mapper;
 
 import com.zyy.entity.Admin;
 import com.zyy.entity.Student;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -23,6 +25,15 @@ public interface AdminMapper {
     @Update("UPDATE managers SET name = #{name},password=#{password}")
     void updateAdmin(Admin admin);
 
-    @Select("SELECT * FROM students WHERE (#{username} IS NULL OR username LIKE CONCAT('%',#{username},'%'))AND (#{name} IS NULL OR username LIKE CONCAT('%',#{name},'%'))")
+    @Select("SELECT * FROM students s WHERE (#{username} IS NULL OR s.username LIKE CONCAT('%',#{username},'%'))AND (#{name} IS NULL OR s.name LIKE CONCAT('%',#{name},'%'))")
     List<Student> selectAll(Student student);
+
+    @Delete("")
+    void deleteStudentById(Integer studentid);
+
+    @Insert("INSERT INTO students(username,name,gender,age,password,phonenum) VALUES (#{username},#{name},#{gender},#{age},#{password},#{phonenum})")
+    void insertStudent(Student student);
+
+    @Update("UPDATE students SET username=#{username},name=#{name},gender=#{gender},age=#{age},password=#{password},phonenum=#{phonenum} WHERE studentid=#{studentid}")
+    void UpdateStudent(Student student);
 }
