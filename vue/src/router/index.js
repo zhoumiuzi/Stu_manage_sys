@@ -13,7 +13,7 @@ const router = createRouter({
         { path: 'home', name: 'Home', component: () => import('@/views/manager/Home.vue') },
 
         // 信息管理
-        { path: 'management/students', name: 'StudentManagement', component: () => import('@/views/manager/management/StudentManagement.vue') },
+        { path: 'management/students', name: 'StudentManagement', component: () => import('@/views/manager/Student.vue') },
         { path: 'management/teachers', name: 'TeacherManagement', component: () => import('@/views/manager/management/TeacherManagement.vue') },
         { path: 'management/courses', name: 'CourseManagement', component: () => import('@/views/manager/Course.vue') },
 
@@ -25,7 +25,7 @@ const router = createRouter({
         { path: 'statistics/students', name: 'StudentStatistics', component: () => import('@/views/manager/statistics/StudentStatistics.vue') },
 
         // 个人信息
-        { path: 'profile', name: 'Profile', component: () => import('@/views/manager/Profile.vue') },
+        { path: 'profile', name: 'Profile', component: () => import('@/views/manager/ManagerInfo.vue') },
       ]
     },
     {
@@ -33,6 +33,12 @@ const router = createRouter({
       path: '/login',
       name: 'Login',
       component: () => import('@/views/login.vue'),
+    },
+    {
+      //注册页面
+      path: '/register',
+      name: 'Register',
+      component:()=>import('@/views/register.vue')
     },
     {
       // 捕获所有未定义路由，跳转到首页或显示404

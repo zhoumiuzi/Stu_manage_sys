@@ -1,11 +1,6 @@
 package com.zyy.entity;
 
 
-
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import lombok.Data;
 /**
  * @Author: zhouMiuzi
  * @CreateTime: 2024-12-06
@@ -13,10 +8,10 @@ import lombok.Data;
  * @Version: 1.0
  */
 
-public class Admin {
+public class Admin extends Account{
 
 
-    private Integer adminId;
+    private Integer adminid;
 
 
     private String name;
@@ -24,12 +19,12 @@ public class Admin {
 
     private String username;
 
-    public Integer getAdminId() {
-        return adminId;
+    public Integer getAdminid() {
+        return adminid;
     }
 
-    public void setAdminId(Integer adminId) {
-        this.adminId = adminId;
+    public void setAdminid(Integer adminid) {
+        this.adminid = adminid;
     }
 
     public String getName() {

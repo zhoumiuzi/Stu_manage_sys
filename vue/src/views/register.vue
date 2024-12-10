@@ -9,7 +9,9 @@ const data = reactive({
   form: {
     username: '',
     password: '',
-    role: 'Student', // 默认角色为学生
+    name: '',
+    role: 'Student',
+
   }
 });
 
@@ -21,30 +23,30 @@ const rules = reactive({
   password: [
     {required: true, message: '请输入密码！', trigger: 'blur'},
   ],
-  role: [
-    {required: true, message: '请选择角色！', trigger: 'change'},
-  ]
+  name: [
+    {required: true, message: '请输入姓名！', trigger: 'blur'},
+  ],
 });
 
 const ruleFormRef = ref();
 
 // validate 方法用于验证整个表单的数据是否合法
-const login = () => {
+const register = () => {
   ruleFormRef.value.validate((valid) => {
     if (valid) {
-      request.post('/login', data.form).then(res => {
+      request.post('/register', data.form).then(res => {
         console.log('Response:', res); // 调试返回值
         if (res.code === '200') {
           localStorage.setItem('student-user', JSON.stringify(res.data));
-          ElMessage.success("登陆成功");
-          router.push('/home');
+          ElMessage.success("注册成功");
+          router.push('/login');
         } else {
-          ElMessage.error("登录失败");
+          ElMessage.error("注册失败");
         }
       }).catch(error => {
         // 处理请求异常的情况
         console.error('Error:', error);
-        const message = error.response?.data?.message || "登录失败";
+        const message = error.response?.data?.message || "注册失败";
         ElMessage.error(message);
       });
     }
@@ -56,28 +58,29 @@ const login = () => {
   <div>
     <div class="login_design">
       <div style="width: 350px" class="login_box">
-        <div style="font-weight: bold;font-size: 26px;text-align: center;padding: 10px;margin-bottom: 10px">Login</div>
+        <div style="font-weight: bold;font-size: 26px;text-align: center;padding: 10px;margin-bottom: 10px">Register</div>
         <el-form ref="ruleFormRef" :rules="rules" :model="data.form" label-width="auto">
           <!-- 账号输入框 -->
           <el-form-item prop="username">
-            <el-input prefix-icon="Avatar" v-model="data.form.username" placeholder="输入账号" />
+            <el-input prefix-icon="Avatar" v-model="data.form.username" placeholder="输入学号"/>
           </el-form-item>
           <!-- 密码输入框 -->
           <el-form-item prop="password">
-            <el-input show-password prefix-icon="Unlock" v-model="data.form.password" placeholder="输入密码" @keydown.enter="login" />
+            <el-input show-password prefix-icon="Unlock" v-model="data.form.password" placeholder="输入密码"
+                      @keydown.enter="login"/>
           </el-form-item>
-          <!-- 角色选择单选框 -->
-          <el-form-item class="title" label="选择角色" prop="role" style=" border-radius: 5px;border-color: #5dbae5">
-            <el-radio-group v-model="data.form.role" style="color: #f5d2cc;">
-              <el-radio-button label="Student" value="Student">学 生</el-radio-button>
-              <el-radio-button label="Admin" value="Admin">管理员</el-radio-button>
-            </el-radio-group>
+          <!-- 个人姓名-->
+          <el-form-item prop="username">
+            <el-input prefix-icon="Avatar" v-model="data.form.name" placeholder="输入姓名"/>
           </el-form-item>
           <!-- 登录按钮 -->
-          <el-button type="info" style="width: 100%" @click="login">登录</el-button>
+          <el-button type="info" style="width: 100%;margin-top: 15px" @click="register">注册</el-button>
         </el-form>
-        <div style="margin-top: 10px;font-size: 14px;text-align: center">
-          IF No Account, Please <a href="/register" style="color: #f17660">注册</a>
+        <div style="margin-top: 20px;font-size: 14px;text-align: center">
+          If Have a Account, Please <a href="/login" style="color: #f17660">登录</a>
+        </div>
+        <div style="margin-top: 20px;font-size: 13px;text-align: center;color: #f5d2cc">
+          注意！只能注册学生账号!
         </div>
       </div>
     </div>
@@ -93,17 +96,16 @@ const login = () => {
   align-items: center;
   justify-content: center;
   background-color: #f5d2cc;
-
 }
 
 .login_box {
   background-color: #87536a;
   box-shadow: 0 0 50px rgb(105, 61, 83);
-  padding: 35px;
+  padding: 40px;
   border-radius: 20px;
 }
 
-::v-deep .title .el-form-item__label {
+.el-form-item__label {
   color: #f5d2cc;
 }
 

@@ -26,6 +26,14 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
+        <!--引入JWT-->
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+            <version>3.10.0</version>
+        </dependency>
+
+
         <!--mysql-->
         <dependency>
             <groupId>mysql</groupId>

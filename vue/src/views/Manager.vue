@@ -8,7 +8,7 @@
         </div>
       </div>
       <div style="width: fit-content; padding-right: 10px; display: flex; align-items: center;">
-        <img src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png" alt="" style="width: 40px; height: 40px">
+        <img src="@/assets/imgs/admin.png" alt="" style="width: 40px; height: 40px">
         <span style="margin-left: 5px">{{ user.username }}</span>
       </div>
     </div>
