@@ -88,7 +88,7 @@ onMounted(() => {
 
 <style scoped>
 .card {
-  padding: 30px;
+  padding: 50px 200px 50px 150px;
   margin: 20px;
   background-color: rgb(227, 195, 193);
   box-shadow: 5px 5px 10px 0 rgb(105, 61, 83);

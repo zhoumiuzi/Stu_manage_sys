@@ -73,4 +73,38 @@ public class StudentService {
         studentMapper.insertStudent(student);
     }
 
+    public Student getStudentByUsername(String username) {
+        Student student = studentMapper.selectByUserName(username);
+        if (student == null) {
+            throw new CustomException("未找到对应学生信息");
+        }
+        return student;
+    }
+
+    public void updateStudentPassword(String username, String oldPassword, String newPassword) {
+        Student dbStudent = studentMapper.selectByUserName(username);
+        if (dbStudent == null) {
+            throw new IllegalArgumentException("学生信息不存在");
+        }
+        if (!dbStudent.getPassword().equals(oldPassword)) {
+            throw new IllegalArgumentException("旧密码不正确");
+        }
+        if (oldPassword.equals(newPassword)) {
+            throw new IllegalArgumentException("新密码不能与旧密码相同");
+        }
+        dbStudent.setPassword(newPassword);
+        studentMapper.updateStudentPassword(dbStudent);
+    }
+
+    public void updateStudentData(Student student) {
+        studentMapper.updateStudent(student);
+    }
+
+    // 删除学生，同时级联删除选课记录
+    public void deleteStudent(int studentId) {
+
+        studentMapper.deleteByStudentId(studentId);
+    }
+
+
 }

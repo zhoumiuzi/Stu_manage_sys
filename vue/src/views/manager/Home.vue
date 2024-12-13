@@ -1,9 +1,14 @@
 <template>
   <div>
 
-    <div class="card" style="line-height: 30px">
+    <div class="card" style="line-height: 30px" v-if="user.role ==='Admin'">
       <div>欢迎您，工号为 <span style="color: #5998b9;font-weight: bold">{{ user.adminid }}</span> 的 <span
           style="color: #5998b9;font-weight: bold">{{ user.username }}</span> 管理员! 祝您今天过得开心！
+      </div>
+    </div>
+    <div class="card" style="line-height: 30px" v-if="user.role ==='Student'">
+      <div>欢迎您，学号为 <span style="color: #5998b9;font-weight: bold">{{ user.username }}</span> 的 <span
+          style="color: #5998b9;font-weight: bold">{{ user.name }}</span> ! 祝您今天过得开心！
       </div>
     </div>
 

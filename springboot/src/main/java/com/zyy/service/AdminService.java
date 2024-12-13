@@ -83,14 +83,14 @@ public class AdminService {
         if (student.getGender() == null || (!student.getGender().equals("M") && !student.getGender().equals("F"))) {
             throw new IllegalArgumentException("不合法的 性别 value");
         }
-        if (studentMapper.findByStudentname(student.getUsername()) != null) {
+        if (studentMapper.selectByUserName(student.getUsername()) != null) {
             throw new IllegalArgumentException("学号已存在");
         }
         adminMapper.insertStudent(student);
     }
 
     public boolean isUsernameExists(String username) {
-        return studentMapper.findByStudentname(username) != null;
+        return studentMapper.selectByUserName(username) != null;
     }
 
 

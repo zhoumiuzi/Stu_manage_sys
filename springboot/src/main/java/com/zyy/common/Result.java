@@ -39,6 +39,8 @@ public class Result {
         return result;
     }
 
+
+
     public String getCode() {
         return code;
     }

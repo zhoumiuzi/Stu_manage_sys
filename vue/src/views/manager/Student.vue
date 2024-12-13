@@ -27,7 +27,7 @@
               <el-button type="primary" size="small" @click="handleClick(scope.row)">
                 编辑
               </el-button>
-              <el-button type="danger" size="small" @click="deleteManage(scope.row.student_id)">删除</el-button>
+              <el-button type="danger" size="small" @click="deleteManage(scope.row.studentid)">删除</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -284,9 +284,9 @@ const addFormShow = () => {
 };
 
 
-const deleteManage = (student_id) => {
+const deleteManage = (studentid) => {
   ElMessageBox.confirm('删除后无法恢复，确认删除吗？', '删除确认', {type: 'warning'}).then(() => {
-    request.delete('/management/student/delete/' + student_id).then(res => {
+    request.delete('/student/delete/'+studentid).then(res => {
       if (res.code === "200") {
         load();
         ElMessage.success("删除成功");

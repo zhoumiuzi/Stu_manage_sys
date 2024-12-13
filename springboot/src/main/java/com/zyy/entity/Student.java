@@ -25,6 +25,6 @@ public class Student extends Account{
     private int age;
     private String gender;
     private String phonenum;
-
-
+    private float totalCredits;    // 总学分
+    private float completedCredits; // 已完成学分
 }

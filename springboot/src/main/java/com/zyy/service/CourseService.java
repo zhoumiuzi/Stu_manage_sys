@@ -24,7 +24,7 @@ public class CourseService {
 
     //新增加传入数据,因为前端输入的是老师的名称，所以需要获取老师的id再填入
     public void addData(Course course) {
-        if (courseMapper.findByCoursenum(course.getCoursenum()) != '0') {
+        if (courseMapper.findByCoursenum(course.getCoursenum()) >0) {
             throw new IllegalArgumentException("课程号已存在");
         }
         // 如果username为null、空字符串、或“暂无教师”，则teacherid=null
@@ -81,7 +81,6 @@ public class CourseService {
     public PageInfo<Course> selectPage(Integer pageNum, Integer pageSize, Course course) {
         PageHelper.startPage(pageNum, pageSize);
         List<Course> courseList = courseMapper.selectAll(course);
-        // System.out.println(courseList);
         return PageInfo.of(courseList);
     }
 

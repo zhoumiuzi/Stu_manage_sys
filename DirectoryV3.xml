@@ -12,4 +12,11 @@
      <tree path="/vue/src/main.js" title="配置引入"/>
      <tree path="/springboot/src/main/java/com/zyy/mapper" title="与数据库交互" extension="" presentableText=""
            tooltipTitle=""/>
- </trees>
+    <tree path="/vue/src/views/manager/Course.vue" title="课程界面"/>
+    <tree path="/vue/src/views/manager/ManagerInfo.vue" title="管理员个人信息"/>
+    <tree path="/vue/src/views/manager/Student.vue" title="学生列表"/>
+    <tree path="/vue/src/views/manager/AdminCourseList.vue" title="成绩录入"/>
+    <tree path="/vue/src/views/manager/AdminCourseStudents.vue" title="课程列表查看" extension="" presentableText=""
+          tooltipTitle="" icon="" textColor="" backgroundColor=""/>
+    <tree path="/vue/src/views/manager/CourseLogin.vue" title="成绩录入"/>
+</trees>

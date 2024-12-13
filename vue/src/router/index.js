@@ -14,18 +14,22 @@ const router = createRouter({
 
         // 信息管理
         { path: 'management/students', name: 'StudentManagement', component: () => import('@/views/manager/Student.vue') },
-        { path: 'management/teachers', name: 'TeacherManagement', component: () => import('@/views/manager/management/TeacherManagement.vue') },
+        { path: 'management/teachers', name: 'TeacherManagement', component: () => import('@/views/manager/Teacher.vue') },
         { path: 'management/courses', name: 'CourseManagement', component: () => import('@/views/manager/Course.vue') },
+        { path: 'management/students/courseselect', name: 'CourseSelect', component: () => import('@/views/student/CourseSelect.vue') },
+        { path: 'management/students/courselist', name: 'StudentCourse', component: () => import('@/views/student/CourseList.vue') },
 
         // 成绩录入
-        { path: 'grades', name: 'GradeEntry', component: () => import('@/views/manager/GradeEntry.vue') },
+        { path: 'management/courselist', name: 'AdminCourseList', component: () => import('@/views/manager/CourseList.vue') },
+        { path: 'management/courselogin', name: 'AdminCourseStudents', component: () => import('@/views/manager/CourseLogin.vue') },
 
         // 数据统计
-        { path: 'statistics/teachers', name: 'TeacherStatistics', component: () => import('@/views/manager/statistics/TeacherStatistics.vue') },
-        { path: 'statistics/students', name: 'StudentStatistics', component: () => import('@/views/manager/statistics/StudentStatistics.vue') },
+        { path: 'statistics/teachers', name: 'TeacherStatistics', component: () => import('@/views/manager/TeacherStatistics.vue') },
+        { path: 'statistics/students', name: 'StudentStatistics', component: () => import('@/views/manager/StudentStatistics.vue') },
 
         // 个人信息
-        { path: 'profile', name: 'Profile', component: () => import('@/views/manager/ManagerInfo.vue') },
+        { path: 'management/adminprofile', name: 'AdminprofileProfile', component: () => import('@/views/manager/ManagerInfo.vue') },
+        { path: 'management/studentprofile', name: 'Studentprofile', component: () => import('@/views/student/StudentInfo.vue') },
       ]
     },
     {

@@ -22,6 +22,9 @@ public interface AdminMapper {
     @Select("SELECT * FROM stu_manage_sys.managers WHERE username=#{username}")
     Admin selectByUserName(String username);
 
+
+
+
     @Update("UPDATE managers SET name = #{name},password=#{password}")
     void updateAdmin(Admin admin);
 

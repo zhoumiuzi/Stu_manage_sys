@@ -1,6 +1,7 @@
 package com.zyy.mapper;
 
 import com.zyy.entity.Student;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -35,9 +36,13 @@ public interface StudentMapper {
     @Update("UPDATE students SET password = #{password} WHERE studentid = #{studentid}")
     void updateStudentPassword(Student student);
 
-    @Select("SELECT * FROM students WHERE username = #{username}")
-    Student findByStudentname(String username);
 
+    @Update("UPDATE students SET name=#{name}, password=#{password}, phonenum=#{phonenum}, age=#{age}, gender=#{gender} WHERE studentid=#{studentid}")
+    void updateStudent(Student student);
+
+
+    @Delete("DELETE FROM students WHERE studentid = #{studentId}")
+    void deleteByStudentId(int studentId);
 }
 
 
