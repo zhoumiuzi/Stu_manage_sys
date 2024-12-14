@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: zhouMiuzi
@@ -44,4 +45,15 @@ public class TeacherService {
     public void deleteTeacher(int teacherId) {
         teacherMapper.deleteByTeacherId(teacherId);
     }
+
+    // 获取不同职称的教师数量和平均工资
+    public List<Map<String, Object>> getCountAndAvgSalaryByTitle() {
+        return teacherMapper.countAndAvgSalaryByTitle();
+    }
+
+    // 获取每个教师所教每门课程的成绩统计
+    public List<Map<String, Object>> getCourseStatisticsByTeacher() {
+        return teacherMapper.getCourseStatisticsByTeacher();
+    }
+
 }

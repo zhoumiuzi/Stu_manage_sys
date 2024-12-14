@@ -8,6 +8,8 @@ import com.zyy.service.TeacherService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: zhouMiuzi
@@ -59,6 +61,20 @@ public class TeacherController {
         } catch (CustomException e) {
             return Result.error("删除失败：" + e.getMessage());
         }
+    }
+
+    // 获取不同职称的教师数量和平均工资
+    @GetMapping("/statistics/title")
+    public Result getCountAndAvgSalaryByTitle() {
+        List<Map<String, Object>> stats = teacherService.getCountAndAvgSalaryByTitle();
+        return Result.success(stats);
+    }
+
+    // 获取每个教师所教每门课程的成绩统计
+    @GetMapping("/statistics/course")
+    public Result getCourseStatisticsByTeacher() {
+        List<Map<String, Object>> stats = teacherService.getCourseStatisticsByTeacher();
+        return Result.success(stats);
     }
 
 }
